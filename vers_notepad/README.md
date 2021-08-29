@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# なんでも書けるメモ帳
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+今までのreactの講習の総まとめとしてtypescriptを使ったアプリ開発を行います
 
 ## Available Scripts
 
