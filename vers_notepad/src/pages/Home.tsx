@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import axios from 'axios';
 import { Redirect } from 'react-router';
+import { KEYS, setItem } from "../utils/LocalStorage";
 
 export const Home = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false)  
-  
+  const [token, setToken] = useState<string>("");
+
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setEmail(e.target.value)    
@@ -21,16 +23,19 @@ export const Home = () => {
     await axios.post("https://raisetech-memo-api.herokuapp.com/api/login",{
 			email: email,
 			password: password,
-    }).then(response => {
-      console.log("body:", response.data);  
-    });
+    }).then((response) => {
+      console.log(response.data.access_token);
+      const newToken = JSON.stringify(response.data.access_token);
+      setToken(newToken);      
+    }).then((resolve) =>{
+    console.log(token);
+    setItem(KEYS.Token, token);
+  });
     setRedirect(true);    
   };
   
   if (redirect) {
     return <Redirect to={'/notepad'} />
-  }else {     
-    console.log("失敗しました");
   };
 
   return (
