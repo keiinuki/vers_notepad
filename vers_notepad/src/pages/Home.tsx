@@ -24,12 +24,11 @@ export const Home = () => {
 			email: email,
 			password: password,
     }).then((response) => {
-      console.log(response.data.access_token);
-      const newToken = JSON.stringify(response.data.access_token);
-      setToken(newToken);      
+      console.log(response.data.access_token);      
+      setToken(response.data.access_token);      
     }).then((resolve) =>{
     console.log(token);
-    setItem(KEYS.Token, token);
+    setItem(KEYS.access_token, token);
   });
     setRedirect(true);    
   };

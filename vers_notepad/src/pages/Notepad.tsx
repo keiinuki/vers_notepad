@@ -35,7 +35,7 @@ export const Notepad = () => {
   };
 
   const onClickAdd = () =>{
-    setToken(getItem(KEYS.Token))
+    setToken(getItem(KEYS.access_token))
     console.log(token);
     // console.log({      
 		// 	title: title,

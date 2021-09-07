@@ -1,20 +1,20 @@
 export const KEYS = {
-  Token: "Token",
-} as const;
-type KEYS = typeof KEYS[keyof typeof KEYS];
+  access_token: "access_token",
+  } as const;
+  type KEYS = typeof KEYS[keyof typeof KEYS];
 
-export const getItem = (key:KEYS) =>  {
-  const value:string | null = localStorage.getItem(key);
+export const getItem = (KEYS:KEYS) =>  {
+  const value:string | null = localStorage.getItem(KEYS);
   if(value !== null){
     return value;
   };
   return "";
 };
 
-export const removeItem = (key:KEYS) => {
-  localStorage.removeItem(key);
+export const removeItem = (KEYS:KEYS) => {
+  localStorage.removeItem(KEYS);
 };
 
-export const setItem = (key:KEYS, value:string,) => {
-  localStorage.setItem(key, value);
+export const setItem = (KEYS:KEYS, value:string,) => {
+  localStorage.setItem(KEYS, value);
 };
