@@ -8,12 +8,8 @@ export const Notepad = () => {
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  const [mark_div, setMark_div] =useState<number>(0);
-  const [postTitle, setPostTitle] = useState<string>("");
-  const [postCategory, setPostCategory] = useState<string>("");
-  const [postDescription, setPostDescription] = useState<string>("");
-  const [postdate, setPostDate] = useState<string>("");
-  const [postMark_div, setPostMark_div] =useState<number>(0);
+  const [mark_div, setMark_div] = useState<number>(0);
+  const [memo, setMemo] = useState<string[] | number[]>([]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -50,18 +46,13 @@ export const Notepad = () => {
       Authorization: `Bearer ${token}`,        
     }
     }).then((response) => {
-      console.log(response.data);      
-      setPostTitle(response.data.title);
-      setPostCategory(response.data.category);
-      setPostDescription(response.data.description);
-      setPostDate(response.data.date);
-      setPostMark_div(response.data.mark_div);
-      
+      console.log(response.data);
+      const newMemo = (response.data)
+      setMemo([...memo, newMemo.id, title, category, description, date, mark_div])  
     }).catch(()=>{
       console.error("失敗しました");
     })      
-    };
-    
+    };    
 
   return (
     <div>
@@ -76,7 +67,7 @@ export const Notepad = () => {
       <button type= "button" onClick={onClickAdd} >保存する</button>
       </form>
       <div>
-      <li>{postTitle}<br/>{postCategory}<br/>{postDescription}<br/>{postdate}<br/>{postMark_div}</li>
+      <li>{memo}</li>
       </div>
       <div>
       <Link to="/">HOMEはこちら</Link>
