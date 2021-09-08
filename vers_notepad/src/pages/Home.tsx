@@ -8,7 +8,6 @@ export const Home = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false)  
-  //const [token, setToken] = useState<string>("");
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -24,14 +23,9 @@ export const Home = () => {
 			email: email,
 			password: password,
     }).then((response) => {
-      console.log(response.data.access_token);      
-      //setToken(response.data.access_token);
+      console.log(response.data.access_token);
       setItem(KEYS.access_token, response.data.access_token);      
     })
-  //   .then((resolve) =>{
-  //   console.log(token);
-  //   setItem(KEYS.access_token, response.data.access_token);
-  // });
     setRedirect(true);    
   };
   

@@ -9,8 +9,11 @@ export const Notepad = () => {
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [mark_div, setMark_div] =useState<number>(0);
-  //const [token, setToken] = useState<string>("");
-  const [memos, setMemos] = useState<string[] | number[]>([]);
+  const [postTitle, setPostTitle] = useState<string>("");
+  const [postCategory, setPostCategory] = useState<string>("");
+  const [postDescription, setPostDescription] = useState<string>("");
+  const [postdate, setPostDate] = useState<string>("");
+  const [postMark_div, setPostMark_div] =useState<number>(0);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -33,18 +36,6 @@ export const Notepad = () => {
     const newMark_div = parseInt(e.target.value)
     setMark_div(newMark_div)
   };
-
-  // const onClickAdd = () =>{
-  //   setToken(getItem(KEYS.access_token))
-  //   console.log(token);
-    // console.log({      
-		// 	title: title,
-		// 	category: category,
-    //   description: description,
-    //   date: date,
-    //   mark_div: mark_div
-    // })
-  //}
   
   const onClickAdd = async () => {
     const token = getItem(KEYS.access_token);    
@@ -55,18 +46,22 @@ export const Notepad = () => {
       date: date,
       mark_div: mark_div,
     },{
-    headers: {
+      headers: {
       Authorization: `Bearer ${token}`,        
     }
     }).then((response) => {
       console.log(response.data);      
-      setMemos(response.data);
+      setPostTitle(response.data.title);
+      setPostCategory(response.data.category);
+      setPostDescription(response.data.description);
+      setPostDate(response.data.date);
+      setPostMark_div(response.data.mark_div);
       
-    }).catch((error)=>{
+    }).catch(()=>{
       console.error("失敗しました");
     })      
     };
-    console.log(memos)
+    
 
   return (
     <div>
@@ -81,7 +76,7 @@ export const Notepad = () => {
       <button type= "button" onClick={onClickAdd} >保存する</button>
       </form>
       <div>
-      {memos.map((val)=>(<li>{val}</li>))}
+      <li>{postTitle}<br/>{postCategory}<br/>{postDescription}<br/>{postdate}<br/>{postMark_div}</li>
       </div>
       <div>
       <Link to="/">HOMEはこちら</Link>
