@@ -8,7 +8,7 @@ export const Home = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false)  
-  const [token, setToken] = useState<string>("");
+  //const [token, setToken] = useState<string>("");
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -19,17 +19,19 @@ export const Home = () => {
     setPassword(e.target.value)
   };  
   
-  const onClickAdd = async () => {    
+  const onClickLogin = async () => {    
     await axios.post("https://raisetech-memo-api.herokuapp.com/api/login",{
 			email: email,
 			password: password,
     }).then((response) => {
       console.log(response.data.access_token);      
-      setToken(response.data.access_token);      
-    }).then((resolve) =>{
-    console.log(token);
-    setItem(KEYS.access_token, token);
-  });
+      //setToken(response.data.access_token);
+      setItem(KEYS.access_token, response.data.access_token);      
+    })
+  //   .then((resolve) =>{
+  //   console.log(token);
+  //   setItem(KEYS.access_token, response.data.access_token);
+  // });
     setRedirect(true);    
   };
   
@@ -44,7 +46,7 @@ export const Home = () => {
         <input type="email" onChange={(e) => onChangeEmail(e)} placeholder="e-mailを入力" />
         <br/>
         <input type="password" onChange={(e) => onChangePassword(e)} placeholder="パスワードを入力"/>
-        <button type= "button" onClick={onClickAdd} >サインインしてメモ帳へ</button>
+        <button type= "button" onClick={onClickLogin} >サインインしてメモ帳へ</button>
       </form>
       <Link to="/Notepad">「メモ帳」はこちら</Link>
     </div>

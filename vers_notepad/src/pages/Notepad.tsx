@@ -9,8 +9,8 @@ export const Notepad = () => {
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [mark_div, setMark_div] =useState<number>(0);
-  const [token, setToken] = useState<string>("");
-  const [memos, setMemos] = useState<string[]>([]);
+  //const [token, setToken] = useState<string>("");
+  const [memos, setMemos] = useState<string[] | number[]>([]);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -34,9 +34,9 @@ export const Notepad = () => {
     setMark_div(newMark_div)
   };
 
-  const onClickAdd = () =>{
-    setToken(getItem(KEYS.access_token))
-    console.log(token);
+  // const onClickAdd = () =>{
+  //   setToken(getItem(KEYS.access_token))
+  //   console.log(token);
     // console.log({      
 		// 	title: title,
 		// 	category: category,
@@ -44,29 +44,29 @@ export const Notepad = () => {
     //   date: date,
     //   mark_div: mark_div
     // })
-  }
+  //}
   
-  // const onClickAdd = async () => {
-  //   setToken(getItem(KEYS.Token));    
-  //   await axios.post("https://raisetech-memo-api.herokuapp.com/api/memo", {      
-	// 		title: title,
-	// 		category: category,
-  //     description: description,
-  //     date: date,
-  //     mark_div: mark_div
-  //   },{
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,        
-  //     }
-  //   }).then((response) => {
-  //     console.log(response.data);
-  //     const newMemos = [...memos];
-  //     newMemos.push(response.data);
-  //     setMemos(newMemos);
-  //     }).catch((error)=>{
-  //       console.error("失敗しました");
-  //     })      
-  // };
+  const onClickAdd = async () => {
+    const token = getItem(KEYS.access_token);    
+    await axios.post("https://raisetech-memo-api.herokuapp.com/api/memo", {      
+		  title: title,
+	    category: category,
+      description: description,
+      date: date,
+      mark_div: mark_div,
+    },{
+    headers: {
+      Authorization: `Bearer ${token}`,        
+    }
+    }).then((response) => {
+      console.log(response.data);      
+      setMemos(response.data);
+      
+    }).catch((error)=>{
+      console.error("失敗しました");
+    })      
+    };
+    console.log(memos)
 
   return (
     <div>
