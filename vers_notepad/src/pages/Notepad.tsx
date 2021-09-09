@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
 import { KEYS, getItem  } from "../utils/LocalStorage";
+import { Memo } from "../type/Type"
 
 export const Notepad = () => {
   const [title, setTitle] = useState<string>("");
@@ -9,7 +10,7 @@ export const Notepad = () => {
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [mark_div, setMark_div] = useState<number>(0);
-  const [memo, setMemo] = useState<string[] | number[]>([]);
+  const [memos, setMemos] = useState<Memo>();
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ export const Notepad = () => {
   
   const onClickAdd = async () => {
     const token = getItem(KEYS.access_token);    
-    await axios.post("https://raisetech-memo-api.herokuapp.com/api/memo", {      
+    await axios.post<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo", {      
 		  title: title,
 	    category: category,
       description: description,
@@ -47,8 +48,7 @@ export const Notepad = () => {
     }
     }).then((response) => {
       console.log(response.data);
-      const newMemo = (response.data)
-      setMemo([...memo, newMemo.id, title, category, description, date, mark_div])  
+      setMemos(response.data)
     }).catch(()=>{
       console.error("失敗しました");
     })      
@@ -67,7 +67,7 @@ export const Notepad = () => {
       <button type= "button" onClick={onClickAdd} >保存する</button>
       </form>
       <div>
-      <li>{memo}</li>
+      <li>{memos?.id}<br/>{memos?.title}<br/>{memos?.category}<br/>{memos?.description}<br/>{memos?.date}<br/>{memos?.mark_div}</li>
       </div>
       <div>
       <Link to="/">HOMEはこちら</Link>

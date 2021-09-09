@@ -1,7 +1,7 @@
 export const KEYS = {
   access_token: "access_token",
   } as const;
-  type KEYS = typeof KEYS[keyof typeof KEYS];
+export type KEYS = typeof KEYS[keyof typeof KEYS];  
 
 export const getItem = (KEYS:KEYS) =>  {
   const value:string | null = localStorage.getItem(KEYS);
