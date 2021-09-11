@@ -5,6 +5,7 @@ import { KEYS, getItem  } from "../utils/LocalStorage";
 import { Memo } from "../type/Type"
 
 export const Notepad = () => {
+  const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -12,7 +13,13 @@ export const Notepad = () => {
   const [mark_div, setMark_div] = useState<number>(0);
   const [memos, setMemos] = useState<Memo>();
   const [getMemos, setGetMemos] = useState<Memo[]>([]);
-
+  
+  const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const value = (e.target.value)
+    const newId = value.toString()
+    setId(newId)
+  };
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setTitle(e.target.value)
@@ -70,6 +77,42 @@ export const Notepad = () => {
       })      
       };
 
+      const onClickPut = async () => {
+        const token = getItem(KEYS.access_token);    
+        await axios.put<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo/", {
+          params: {
+            id: id }
+          },{
+          title: title,
+          category: category,
+          description: description,
+          date: date,
+          mark_div: mark_div,
+          }, {
+            headers: {
+            Authorization: `Bearer ${token}`,
+          }})
+          .then((response) => {
+          console.log(response.data);
+          setMemos(response.data)
+        }).catch(()=>{
+          console.error("失敗しました");
+        })      
+        };
+
+        const onClickDelete = async () => {
+          const token = getItem(KEYS.access_token);    
+          await axios.delete<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo/${id}", {
+            headers: {
+            Authorization: `Bearer ${token}`,        
+          }}
+          ).then((response) => {
+            console.log(response.data);            
+          }).catch(()=>{
+            console.error("失敗しました");
+          })      
+          };
+
   return (
     <div>
       <h1>ここをメモ帳にします</h1>
@@ -80,7 +123,10 @@ export const Notepad = () => {
       <input type="date" onChange={onChangeDate} value={date}></input>
       <input type="radio" name="revel" value="0" onChange={onChangeMarkDiv} />重要
       <input type="radio" name="revel" value="1" onChange={onChangeMarkDiv} />普通
-      <button type= "button" onClick={onClickAdd} >保存する</button>
+      <button type= "button" onClick={onClickAdd} >保存する</button><br/>
+      <input type="number" onChange={onChangeId} placeholder="idを入力" value={id} /><br/>
+      <button type= "button" onClick={onClickPut} >編集する</button>
+      <button type= "button" onClick={onClickDelete} >削除する</button>
       </form>
       <div>
       <h2>登録したメモはこれです</h2>  
