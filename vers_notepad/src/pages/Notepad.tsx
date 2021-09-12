@@ -80,10 +80,6 @@ export const Notepad = () => {
       const onClickPut = async () => {
         const token = getItem(KEYS.access_token);    
         await axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
-        // {
-        //   params: {
-        //     id: id }
-        //   },
           {
           title: title,
           category: category,
