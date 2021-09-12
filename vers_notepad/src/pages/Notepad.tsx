@@ -79,10 +79,12 @@ export const Notepad = () => {
 
       const onClickPut = async () => {
         const token = getItem(KEYS.access_token);    
-        await axios.put<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo/", {
-          params: {
-            id: id }
-          },{
+        await axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
+        // {
+        //   params: {
+        //     id: id }
+        //   },
+          {
           title: title,
           category: category,
           description: description,
@@ -102,7 +104,7 @@ export const Notepad = () => {
 
         const onClickDelete = async () => {
           const token = getItem(KEYS.access_token);    
-          await axios.delete<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo/${id}", {
+          await axios.delete<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, {
             headers: {
             Authorization: `Bearer ${token}`,        
           }}
