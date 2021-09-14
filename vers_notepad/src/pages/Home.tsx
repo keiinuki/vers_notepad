@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
 import { Redirect } from 'react-router';
-import { KEYS, setItem } from "../utils/LocalStorage";
-
+import { Keys, setItem } from "../utils/LocalStorage";
+import toast, { Toaster } from "react-hot-toast";
 
 export const Home = () => {
   const [email, setEmail] = useState<string>("");
@@ -19,15 +19,18 @@ export const Home = () => {
     setPassword(e.target.value)
   };  
   
-  const onClickLogin = async () => {    
-    await axios.post("https://raisetech-memo-api.herokuapp.com/api/login",{
-			email: email,
-			password: password,
+  const onClickLogin = async () => {
+    await axios.post("https://raisetech-memo-api.herokuapp.com/api/login", {
+      email: email,
+      password: password,
     }).then((response) => {
       console.log(response.data.access_token);
-      setItem(KEYS.access_token, response.data.access_token);      
-    })
-    setRedirect(true);    
+      setItem(Keys.access_token, response.data.access_token);
+    }).then(() => {
+      setRedirect(true)
+    }).catch(() => {
+      toast.error("ログインに失敗しました．．．");      
+    });
   };
   
   if (redirect) {
@@ -38,12 +41,23 @@ export const Home = () => {
     <div>
       <h1>ここをHOMEにします</h1>
       <form>
-        <input type="email" onChange={(e) => onChangeEmail(e)} placeholder="e-mailを入力" />
-        <br/>
-        <input type="password" onChange={(e) => onChangePassword(e)} placeholder="パスワードを入力"/>
-        <button type= "button" onClick={onClickLogin} >サインインしてメモ帳へ</button>
+        <input
+          type="email"
+          onChange={(e) => onChangeEmail(e)}
+          placeholder="e-mailを入力"
+        />
+        <br />
+        <input
+          type="password"
+          onChange={(e) => onChangePassword(e)}
+          placeholder="パスワードを入力"
+        />
+        <button type="button" onClick={onClickLogin}>
+          サインインしてメモ帳へ
+        </button>
       </form>
       <Link to="/Notepad">「メモ帳」はこちら</Link>
+      <Toaster />
     </div>
   );
 };
