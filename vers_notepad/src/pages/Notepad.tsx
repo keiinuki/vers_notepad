@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
 import { Keys, getItem  } from "../utils/LocalStorage";
 import { Memo } from "../type/Type"
 import toast, { Toaster } from "react-hot-toast"
+import { useRecoilState } from "recoil";
+import { getMemosState } from "../store/atom";
 
-export const Notepad = () => {
+export const Notepad = () => {  
   const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -13,7 +15,7 @@ export const Notepad = () => {
   const [date, setDate] = useState<string>("");
   const [mark_div, setMark_div] = useState<number>(0);
   const [memos, setMemos] = useState<Memo>();
-  const [getMemos, setGetMemos] = useState<Memo[]>([]);
+  const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
   
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -111,8 +113,8 @@ export const Notepad = () => {
           }).catch(()=>{
             console.error("失敗しました");
           })      
-          };
-
+        };
+  
   return (
     <div>
       <h1>ここをメモ帳にします</h1>
