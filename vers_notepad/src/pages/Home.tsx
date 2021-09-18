@@ -6,7 +6,7 @@ export const Home = () => {
 
   return (
     <div>
-      <h1>ここをHOMEにします</h1>
+      <h1>なんでもメモアプリ HOME</h1>
       <ModalButton />
       <br/>
       <Link to="/Notepad">「メモ帳」はこちら</Link>
