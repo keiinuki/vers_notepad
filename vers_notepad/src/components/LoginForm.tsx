@@ -1,10 +1,11 @@
+import { memo } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router";
 import { Keys, setItem } from "../utils/LocalStorage";
 import toast, { Toaster } from "react-hot-toast";
 
-export const LoginForm = () => {
+export const LoginForm = memo(() => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false);
@@ -64,4 +65,4 @@ export const LoginForm = () => {
       <Toaster />
     </div>
   );
-};
+});
