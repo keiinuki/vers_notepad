@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from 'axios';
-import { Keys, getItem  } from "../utils/LocalStorage";
+import { Keys, getItem } from "../utils/LocalStorage";
 import { Memo } from "../type/Type"
 import toast, { Toaster } from "react-hot-toast"
 import { useRecoilState } from "recoil";
 import { getMemosState } from "../store/atom";
+import { LogoutButton } from "../components/LogoutButton";
 
 export const Notepad = () => {  
   const [id, setId] = useState<string>("");
@@ -111,7 +112,7 @@ export const Notepad = () => {
           ).then((response) => {
             console.log(response.data);            
           }).catch(()=>{
-            console.error("失敗しました");
+            toast.error("失敗しました");
           })      
         };
   
@@ -202,6 +203,7 @@ export const Notepad = () => {
         <Toaster />
       </div>
       <div>
+        <LogoutButton color="red" />
         <Link to="/">HOMEはこちら</Link>
       </div>
     </div>

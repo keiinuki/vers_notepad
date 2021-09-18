@@ -1,6 +1,7 @@
 export const Keys = {
   access_token: "access_token",
-  } as const;
+} as const;
+// eslint-disable-next-line
 export type Keys = typeof Keys[keyof typeof Keys];  
 
 export const getItem = (Keys:Keys) =>  {
