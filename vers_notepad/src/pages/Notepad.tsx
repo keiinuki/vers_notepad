@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast"
 //import { getMemosState } from "../store/atom";
 import { LogoutButton } from "../components/LogoutButton";
 import { GetListButton } from "../components/GetListButton"
+import { chakra } from "@chakra-ui/react";
 
 export const Notepad = () => {  
   const [id, setId] = useState<string>("");

@@ -2,6 +2,7 @@ import { memo } from "react";
 import { useHistory } from "react-router-dom";
 import { Keys, removeItem } from "../utils/LocalStorage";
 import toast from "react-hot-toast";
+import { chakra } from "@chakra-ui/react";
 
 type ButtonColor = {
   color?: string;

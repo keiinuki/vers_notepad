@@ -6,6 +6,7 @@ import { Memo } from "../type/Type";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
+import { chakra } from "@chakra-ui/react";
 
 export const GetListButton = memo(() => {
   const history = useHistory();

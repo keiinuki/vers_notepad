@@ -2,6 +2,7 @@ import "./components.css";
 import { useState } from "react";
 import { memo } from "react";
 import { Modal } from "./Modal"
+import { chakra } from "@chakra-ui/react";
 
 
 export const ModalButton = memo(() => {
