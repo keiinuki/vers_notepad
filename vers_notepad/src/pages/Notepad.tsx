@@ -206,7 +206,7 @@ export const Notepad = () => {
         <Toaster />
       </div>
       <div>
-        <LogoutButton color="red" />
+        <LogoutButton color="white" />
         <Link to="/">HOMEはこちら</Link>
       </div>
     </div>

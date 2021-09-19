@@ -4,7 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router";
 import { Keys, setItem } from "../utils/LocalStorage";
 import toast, { Toaster } from "react-hot-toast";
-import { chakra } from "@chakra-ui/react";
+import { chakra, Button, ButtonGroup } from "@chakra-ui/react";
 
 export const LoginForm = memo(() => {
   const [email, setEmail] = useState<string>("");
@@ -59,9 +59,9 @@ export const LoginForm = memo(() => {
           placeholder="パスワードを入力"
         />
         <br />
-        <button type="button" onClick={onClickLogin} >
+        <Button colorScheme="blue" size="sm" type="button" onClick={onClickLogin} >
           ログインする
-        </button>
+        </Button>
       </form>
       <Toaster />
     </div>

@@ -6,7 +6,7 @@ import { Memo } from "../type/Type";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
-import { chakra } from "@chakra-ui/react";
+import { chakra, Button, ButtonGroup } from "@chakra-ui/react";
 
 export const GetListButton = memo(() => {
   const history = useHistory();
@@ -25,21 +25,20 @@ export const GetListButton = memo(() => {
         setGetMemos(newGetMemos);
       })
       .then(() => {
-        history.push("/pastarticles");
+        history.push({ pathname: "/pastarticles", state:getMemos });
       })
       .catch(() => {
-        toast.error("失敗しました");
+        toast.error("ログインが必要です");
       });
   };
   
   return (
     <div>
-      <h2>今まで登録したメモはこれです</h2>
-      <button type="button" onClick={onClickGet}>
-        全部を表示する
-      </button>
-      
-      <ul>
+      <Button colorScheme="teal" size="sm" type="button" onClick={onClickGet}>
+        今までの記事はこちら
+      </Button>
+
+      {/*<ul>
         {getMemos.map((getMemos, i) => (
           <li key={i}>
             {getMemos?.id}
@@ -55,7 +54,7 @@ export const GetListButton = memo(() => {
             {getMemos?.mark_div}
           </li>
         ))}
-      </ul>
+        </ul>*/}
       <Toaster />
     </div>
   );

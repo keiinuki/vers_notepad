@@ -1,6 +1,7 @@
 import "./components.css";
 import { memo } from "react";
 import { LoginForm } from "./LoginForm"
+import { chakra, Button, ButtonGroup } from "@chakra-ui/react";
 
 type ModalButton = {
   show: boolean;
@@ -15,8 +16,12 @@ export const Modal = memo(( props: ModalButton ) => {
     return (
       <div id="overlay" onClick={closeModal}>
         <div id="content" onClick={(e) => e.stopPropagation()}>
-          <p><LoginForm/></p>
-          <button onClick={closeModal}>戻る</button>
+          <p>
+            <LoginForm />
+          </p>
+          <Button colorScheme="red" size="sm" onClick={closeModal}>
+            戻る
+          </Button>
         </div>
       </div>
     );

@@ -2,7 +2,7 @@ import "./components.css";
 import { useState } from "react";
 import { memo } from "react";
 import { Modal } from "./Modal"
-import { chakra } from "@chakra-ui/react";
+import { chakra, Button, ButtonGroup } from "@chakra-ui/react";
 
 
 export const ModalButton = memo(() => {
@@ -14,7 +14,9 @@ export const ModalButton = memo(() => {
   }
   return (
     <div>
-      <button onClick={openModal}>ログインはこちらから</button>
+      <Button colorScheme="teal" size="sm" onClick={openModal}>
+        ログインはこちらから
+      </Button>
       <Modal show={show} setShow={setShow} />
     </div>
   );
