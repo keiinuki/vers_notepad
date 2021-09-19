@@ -6,14 +6,11 @@ import { getMemosState } from "../store/atom";
 import { Memo } from "../type/Type";
 import { Keys, getItem } from "../utils/LocalStorage";
 import toast, { Toaster } from "react-hot-toast";
-import { Box, Button, FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText, Input } from "@chakra-ui/react";
+import { Box, Button, FormControl, Input } from "@chakra-ui/react";
 
 export const DeleteMemoButton = memo(() => {
   const [id, setId] = useState<string>("");
-  //const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
+  const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
@@ -28,6 +25,19 @@ export const DeleteMemoButton = memo(() => {
           Authorization: `Bearer ${token}`,
         },
       })
+      .then(() => {
+        axios.get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+        })
+      })
+          .then((response) => {
+            console.log(response.data);
+            const newGetMemos = [...getMemos, ...response.data];
+            setGetMemos(newGetMemos);
+          })
+      
       .catch(() => {
         toast.error("失敗しました");
       });
