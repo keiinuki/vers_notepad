@@ -1,4 +1,3 @@
-import { chakra } from "@chakra-ui/react";
 import {
   List,
   ListItem,
@@ -6,7 +5,8 @@ import {
   OrderedList,
   UnorderedList,
   Box,
-  Text
+  Text,
+  Flex
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
@@ -14,7 +14,7 @@ import { getMemosState } from "../store/atom";
 import { Link, useLocation } from "react-router-dom";
 import { Memo } from "../type/Type";
 import { LogoutButton } from "../components/LogoutButton";
-import { GetListButton } from "../components/GetListButton";
+import { DeleteMemoButton } from "../components/DeleteMemoButton";
 
 export const PastArticles = () => {
   const { state } =
@@ -34,7 +34,7 @@ export const PastArticles = () => {
 
       <UnorderedList>
         {getMemos.map((getMemos, i) => (
-          <Box m={5} p={15} w={300} bg="tomato">
+          <Flex m={5} p={15} w={300} bg="tomato">
             <ListItem key={i}>
               {getMemos?.id}
               <br />
@@ -48,11 +48,11 @@ export const PastArticles = () => {
               <br />
               {getMemos?.mark_div}
             </ListItem>
-          </Box>
+          </Flex>
         ))}
       </UnorderedList>
       <Box>
-        <GetListButton />
+        <DeleteMemoButton/>
         <LogoutButton color="white" />
       </Box>
       <Text textAlign={["center"]} color="green">

@@ -3,9 +3,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { Keys, getItem } from "../utils/LocalStorage";
 import { Memo } from "../type/Type"
-import toast, { Toaster } from "react-hot-toast"
-//import { useRecoilState } from "recoil";
-//import { getMemosState } from "../store/atom";
+import toast, { Toaster } from "react-hot-toast";
 import { LogoutButton } from "../components/LogoutButton";
 import { GetListButton } from "../components/GetListButton"
 import { chakra } from "@chakra-ui/react";
@@ -18,7 +16,6 @@ export const Notepad = () => {
   const [date, setDate] = useState<string>("");
   const [mark_div, setMark_div] = useState<number>(0);
   const [memos, setMemos] = useState<Memo>();
-  //const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
   
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -69,20 +66,6 @@ export const Notepad = () => {
     })      
     };
     
-    // const onClickGet = async () => {
-    //   const token = getItem(Keys.access_token);    
-    //   await axios.get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
-    //     headers: {
-    //     Authorization: `Bearer ${token}`,        
-    //   }
-    //   }).then((response) => {
-    //     console.log(response.data);
-    //     const newGetMemos = [...getMemos, ...response.data]
-    //     setGetMemos(newGetMemos)
-    //   }).catch(()=>{
-    //     toast.error("失敗しました");
-    //   })      
-    //   };
 
       const onClickPut = async () => {
         const token = getItem(Keys.access_token);    
@@ -182,27 +165,6 @@ export const Notepad = () => {
         </p>
         <br />
         <div><GetListButton/></div>
-        {/*<button type="button" onClick={onClickGet}>
-          全部を表示する
-        </button>
-        <h2>今まで登録したメモはこれです</h2>
-        <ul>
-          {getMemos.map((getMemos, i) => (
-            <li key={i}>
-              {getMemos?.id}
-              <br />
-              {getMemos?.title}
-              <br />
-              {getMemos?.category}
-              <br />
-              {getMemos?.description}
-              <br />
-              {getMemos?.date}
-              <br />
-              {getMemos?.mark_div}
-            </li>
-          ))}
-          </ul>*/}
         <Toaster />
       </div>
       <div>

@@ -60,7 +60,7 @@ export const LoginForm = memo(() => {
         />
         <br />
         <Button colorScheme="blue" size="sm" type="button" onClick={onClickLogin} >
-          ログインする
+          ログイン
         </Button>
       </form>
       <Toaster />
