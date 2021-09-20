@@ -1,8 +1,5 @@
 import {
-  List,
   ListItem,
-  ListIcon,
-  OrderedList,
   UnorderedList,
   Box,
   Text,
@@ -24,7 +21,8 @@ export const PastArticles = () => {
     if (state.getMemos) {
       setGetMemos(state.getMemos);
     } 
-  }, [state]);
+    }, [state.getMemos, setGetMemos]);
+  
 
   return (
     <Box m="auto" p={35} bg="gray.50">
@@ -33,9 +31,9 @@ export const PastArticles = () => {
       </Text>
 
       <UnorderedList>
-        {getMemos.map((getMemos, i) => (
+        {getMemos.map((getMemos) => (
           <Flex m={5} p={15} w={300} bg="tomato">
-            <ListItem key={i}>
+            <ListItem key={getMemos.id}>
               {getMemos?.id}
               <br />
               {getMemos?.title}

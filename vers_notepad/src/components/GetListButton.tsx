@@ -6,7 +6,7 @@ import { Memo } from "../type/Type";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
-import { chakra, Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 export const GetListButton = memo(() => {
   const history = useHistory();
@@ -25,7 +25,7 @@ export const GetListButton = memo(() => {
         setGetMemos(newGetMemos);
       })
       .then(() => {
-        history.push({ pathname: "/pastarticles", state:getMemos });
+        history.push({ pathname: "/notepad/pastarticles", state:getMemos });
       })
       .catch(() => {
         toast.error("ログインが必要です");

@@ -6,7 +6,7 @@ import { Memo } from "../type/Type"
 import toast, { Toaster } from "react-hot-toast";
 import { LogoutButton } from "../components/LogoutButton";
 import { GetListButton } from "../components/GetListButton"
-import { chakra } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 export const Notepad = () => {  
   const [id, setId] = useState<string>("");
@@ -102,7 +102,7 @@ export const Notepad = () => {
         };
   
   return (
-    <div>
+    <Box>
       <h1>ここをメモ帳にします</h1>
       <form>
         <input
@@ -171,6 +171,6 @@ export const Notepad = () => {
         <LogoutButton color="white" />
         <Link to="/">HOMEはこちら</Link>
       </div>
-    </div>
+    </Box>
   );
 };

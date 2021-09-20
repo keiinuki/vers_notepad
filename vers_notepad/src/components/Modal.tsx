@@ -1,7 +1,7 @@
 import "./components.css";
 import { memo } from "react";
 import { LoginForm } from "./LoginForm"
-import { chakra, Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 type ModalButton = {
   show: boolean;

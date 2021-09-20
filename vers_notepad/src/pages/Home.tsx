@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { ModalButton } from "../components/ModalButton"
-import { chakra, Flex, Box, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 import { GetListButton } from "../components/GetListButton";
 

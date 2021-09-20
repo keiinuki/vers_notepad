@@ -2,13 +2,13 @@ import { memo } from "react";
 import { useHistory } from "react-router-dom";
 import { Keys, removeItem } from "../utils/LocalStorage";
 import toast from "react-hot-toast";
-import { chakra, Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
-type Button = {
+type ButtonColor = {
   color?: string;
 };
 
-export const LogoutButton = memo((props: Button) => {
+export const LogoutButton = memo((props: ButtonColor) => {
   const history = useHistory();
   const onClick = () => {
     removeItem(Keys.access_token);
