@@ -23,7 +23,7 @@ export const PastArticles = () => {
   useEffect(() => {
     if (state.getMemos) {
       setGetMemos(state.getMemos);
-    }
+    } 
   }, [state]);
 
   return (
