@@ -11,9 +11,9 @@ import { Button } from "@chakra-ui/react";
 export const GetListButton = memo(() => {
   const history = useHistory();
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
-  const onClickGet = async () => {
+  const onClickGet = () => {
     const token = getItem(Keys.access_token);
-    await axios
+    axios
       .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -25,7 +25,7 @@ export const GetListButton = memo(() => {
         setGetMemos(newGetMemos);
       })
       .then(() => {
-        history.push({ pathname: "/notepad/pastarticles", state:getMemos });
+        history.push({ pathname: "/notepad/pastarticles", state: getMemos });
       })
       .catch(() => {
         toast.error("ログインが必要です");
@@ -37,25 +37,10 @@ export const GetListButton = memo(() => {
       <Button colorScheme="teal" size="sm" type="button" onClick={onClickGet}>
         今までの記事はこちら
       </Button>
-
-      {/*<ul>
-        {getMemos.map((getMemos, i) => (
-          <li key={i}>
-            {getMemos?.id}
-            <br />
-            {getMemos?.title}
-            <br />
-            {getMemos?.category}
-            <br />
-            {getMemos?.description}
-            <br />
-            {getMemos?.date}
-            <br />
-            {getMemos?.mark_div}
-          </li>
-        ))}
-        </ul>*/}
       <Toaster />
     </div>
   );
 });
+
+
+

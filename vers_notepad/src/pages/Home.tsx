@@ -23,9 +23,7 @@ export const Home = () => {
       </Box>
       <Text textAlign={["center"]} color="green.500">
         <Link to="/Notepad">「メモ帳」はこちら</Link>
-      </Text>
-      
-
+      </Text>    
       <Toaster />
     </Box>
   );

@@ -20,8 +20,8 @@ export const LoginForm = memo(() => {
     setPassword(e.target.value);
   };
 
-  const onClickLogin = async () => {
-    await axios
+  const onClickLogin = () => {
+    axios
       .post("https://raisetech-memo-api.herokuapp.com/api/login", {
         email: email,
         password: password,

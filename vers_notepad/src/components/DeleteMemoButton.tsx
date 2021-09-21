@@ -17,28 +17,31 @@ export const DeleteMemoButton = memo(() => {
     const newId = value.toString();
     setId(newId);
   };
-  const onClickDelete = async () => {
+  const onClickDelete = () => {
     const token = getItem(Keys.access_token);
-    await axios
-      .delete<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, {
+    axios
+      .delete<Memo[]>(
+        `https://raisetech-memo-api.herokuapp.com/api/memo/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    axios
+      .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      await axios
-        .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          const newGetMemos = [...getMemos, ...response.data];
-          setGetMemos(newGetMemos);
-        })
-        .catch(() => {
-          toast.error("失敗しました");
-        });
+      .then((response) => {
+        console.log(response.data);
+        const newGetMemos = [...getMemos, ...response.data];
+        setGetMemos(newGetMemos);
+      })
+      .catch(() => {
+        toast.error("失敗しました");
+      });
   };
   
   return (

@@ -31,9 +31,9 @@ export const PastArticles = () => {
       </Text>
 
       <UnorderedList>
-        {getMemos.map((getMemos) => (
-          <Flex m={5} p={15} w={300} bg="tomato">
-            <ListItem key={getMemos.id}>
+        {getMemos.map((getMemos: Memo, index: number) => (
+          <Flex m={5} p={15} w={300} bg="tomato" key={index}>
+            <ListItem>
               {getMemos?.id}
               <br />
               {getMemos?.title}
@@ -50,7 +50,7 @@ export const PastArticles = () => {
         ))}
       </UnorderedList>
       <Box>
-        <DeleteMemoButton/>
+        <DeleteMemoButton />
         <LogoutButton color="white" />
       </Box>
       <Text textAlign={["center"]} color="green">

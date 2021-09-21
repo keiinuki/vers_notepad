@@ -45,9 +45,9 @@ export const Notepad = () => {
     setMark_div(newMark_div)
   };
   
-  const onClickAdd = async () => {
+  const onClickAdd =  () => {
     const token = getItem(Keys.access_token);    
-    await axios.post<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo", {      
+    axios.post<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo", {      
 		  title: title,
 	    category: category,
       description: description,
@@ -67,9 +67,9 @@ export const Notepad = () => {
     };
     
 
-      const onClickPut = async () => {
+      const onClickPut = () => {
         const token = getItem(Keys.access_token);    
-        await axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
+        axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
           {
           title: title,
           category: category,
@@ -86,19 +86,6 @@ export const Notepad = () => {
         }).catch(()=>{
           toast.error("失敗しました");
         })      
-        };
-
-        const onClickDelete = async () => {
-          const token = getItem(Keys.access_token);    
-          await axios.delete<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, {
-            headers: {
-            Authorization: `Bearer ${token}`,        
-          }}
-          ).then((response) => {
-            console.log(response.data);            
-          }).catch(()=>{
-            toast.error("失敗しました");
-          })      
         };
   
   return (
@@ -143,9 +130,6 @@ export const Notepad = () => {
         <br />
         <button type="button" onClick={onClickPut}>
           編集する
-        </button>
-        <button type="button" onClick={onClickDelete}>
-          削除する
         </button>
       </form>
       <div>
