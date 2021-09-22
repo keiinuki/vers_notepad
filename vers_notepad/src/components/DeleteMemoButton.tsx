@@ -16,45 +16,12 @@ export const DeleteMemoButton = memo(() => {
     const value = e.target.value;
     const newId = value.toString();
     setId(newId);
-  };
-  
-  // const onClickDelete = () => {
-  //   const token = getItem(Keys.access_token);
-  //   axios
-  //     .delete<Memo[]>(
-  //       `https://raisetech-memo-api.herokuapp.com/api/memo/${id}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     )
-  //     .then(() => {
-  //       const newGetMemos = [...getMemos];
-  //       newGetMemos.length = 0;
-  //       setGetMemos(newGetMemos);
-  //       console.log(getMemos);
-  //     })
-  //     .catch(() => {
-  //       toast.error("idが間違っています");
-  //     });
-  //   setTimeout(() => {
-  //     axios
-  //       .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         console.log(response.data);
-  //         const newGetMemos = [...getMemos, ...response.data];
-  //         setGetMemos(newGetMemos);
-  //       })
-  //       .catch(() => {
-  //         toast.error("失敗しました");
-  //       });
-  //   }, 1000);
-  // };
+    
+    const deleteMemos = [...getMemos];
+    deleteMemos.length = 0;
+    setGetMemos(deleteMemos);
+    console.log(getMemos);
+  };  
   
   const onClickDelete = async () => {
     try {
@@ -66,30 +33,23 @@ export const DeleteMemoButton = memo(() => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
-      )
-      const deleteMemos = [...getMemos];
-      deleteMemos.length = 0;
-      setGetMemos(deleteMemos);
-      console.log(getMemos);
+          });
       
-        const response = await axios.get<Memo[]>(
-          "https://raisetech-memo-api.herokuapp.com/api/memos",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        console.log(response.data);
-        const newGetMemos = [...getMemos, ...response.data];
-        setGetMemos(newGetMemos);
-      }
-      catch(error) {
-          toast.error("idが違います");
-        };
+      const response = await axios.get<Memo[]>(
+        "https://raisetech-memo-api.herokuapp.com/api/memos",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      console.log(response.data);
+      const newGetMemos = [...getMemos, ...response.data];
+      setGetMemos(newGetMemos);
     }
-  
+    catch (error) {
+      toast.error("idが違います");
+    };
+  };
   
   return (
     <Box>
