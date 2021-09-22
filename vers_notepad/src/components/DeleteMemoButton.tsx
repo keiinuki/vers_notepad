@@ -17,6 +17,7 @@ export const DeleteMemoButton = memo(() => {
     const newId = value.toString();
     setId(newId);
   };
+  
   const onClickDelete = () => {
     const token = getItem(Keys.access_token);
     axios
@@ -26,23 +27,33 @@ export const DeleteMemoButton = memo(() => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      )
-    axios
-      .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        const newGetMemos = [...getMemos, ...response.data];
+        })
+      .then(() => {
+        const newGetMemos = [...getMemos];
+        newGetMemos.length = 0;
         setGetMemos(newGetMemos);
-      })
+        console.log(getMemos);
+      }) 
       .catch(() => {
-        toast.error("失敗しました");
+        toast.error("idが間違っています");
       });
-  };
+      setTimeout(() => {
+      axios
+        .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          const newGetMemos = [...getMemos, ...response.data];
+          setGetMemos(newGetMemos);
+        })
+        .catch(() => {
+          toast.error("失敗しました");
+        });
+    }, 1000);
+    };
   
   return (
     <Box>
