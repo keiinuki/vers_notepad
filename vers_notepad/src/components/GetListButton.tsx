@@ -11,25 +11,24 @@ import { Button } from "@chakra-ui/react";
 export const GetListButton = memo(() => {
   const history = useHistory();
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
-  const onClickGet = () => {
-    const token = getItem(Keys.access_token);
-    axios
-      .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        const newGetMemos = [...getMemos, ...response.data];
-        setGetMemos(newGetMemos);
-      })
-      .then(() => {
-        history.push({ pathname: "/notepad/pastarticles", state: getMemos });
-      })
-      .catch(() => {
-        toast.error("ログインが必要です");
-      });
+  const onClickGet = async () => {
+    try {
+      const token = getItem(Keys.access_token);
+      const response = await axios
+        .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })      
+      console.log(response.data);
+      const newGetMemos = [...getMemos, ...response.data];
+      setGetMemos(newGetMemos);   
+      
+      history.push({ pathname: "/notepad/pastarticles", state: getMemos });
+    }
+    catch (error) {
+      toast.error("ログインが必要です");
+    };
   };
   
   return (

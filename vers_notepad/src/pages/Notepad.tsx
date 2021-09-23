@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { LogoutButton } from "../components/LogoutButton";
 import { GetListButton } from "../components/GetListButton"
 import { Box } from "@chakra-ui/react";
+import { BackHomeButton } from "../components/BackHomeButton";
 
 export const Notepad = () => {  
   const [id, setId] = useState<string>("");
@@ -45,31 +46,39 @@ export const Notepad = () => {
     setMark_div(newMark_div)
   };
   
-  const onClickAdd =  () => {
-    const token = getItem(Keys.access_token);    
-    axios.post<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo", {      
-		  title: title,
-	    category: category,
-      description: description,
-      date: date,
-      mark_div: mark_div,
-    },{
-      headers: {
-      Authorization: `Bearer ${token}`,        
-    }
-    }).then((response) => {
+  const onClickAdd = async () => {
+    try{
+      const token = getItem(Keys.access_token);
+      const response = await axios.post<Memo>("https://raisetech-memo-api.herokuapp.com/api/memo",
+        {
+		    title: title,
+	      category: category,
+        description: description,
+        date: date,
+        mark_div: mark_div,
+        },{
+        headers: {
+        Authorization: `Bearer ${token}`,        
+        }
+        })
       console.log(response.data);
-      setMemos(response.data)
-    }).catch(()=>{
+      setMemos(response.data);
+      setTitle("");
+      setCategory("");
+      setDescription("");
+      setDate("");
+      setMark_div(0);
+    }
+    catch (error) {
       console.error("失敗しました");
       toast.error("もう一度ログインしてください！");
-    })      
     };
-    
+    };
 
-      const onClickPut = () => {
-        const token = getItem(Keys.access_token);    
-        axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
+  const onClickPut = async () => {
+    try{
+        const token = getItem(Keys.access_token);
+        const response = await axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
           {
           title: title,
           category: category,
@@ -79,13 +88,19 @@ export const Notepad = () => {
           }, {
             headers: {
             Authorization: `Bearer ${token}`,
-          }})
-          .then((response) => {
-          console.log(response.data);
-          setMemos(response.data)
-        }).catch(()=>{
+          }})          
+      console.log(response.data);
+      setMemos(response.data);
+      setId("");
+      setTitle("");
+      setCategory("");
+      setDescription("");
+      setDate("");
+      setMark_div(0);
+        }
+        catch (error) {
           toast.error("失敗しました");
-        })      
+        };
         };
   
   return (
@@ -148,11 +163,16 @@ export const Notepad = () => {
           {memos?.mark_div}
         </p>
         <br />
-        <div><GetListButton/></div>
+        <div>
+          <GetListButton />
+        </div>
         <Toaster />
       </div>
       <div>
         <LogoutButton color="white" />
+        
+          <BackHomeButton />
+        
         <Link to="/">HOMEはこちら</Link>
       </div>
     </Box>

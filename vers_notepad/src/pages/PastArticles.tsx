@@ -12,6 +12,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Memo } from "../type/Type";
 import { LogoutButton } from "../components/LogoutButton";
 import { DeleteMemoButton } from "../components/DeleteMemoButton";
+import { BackHomeButton } from "../components/BackHomeButton";
 
 export const PastArticles = () => {
   const { state } =
@@ -52,6 +53,9 @@ export const PastArticles = () => {
       <Box>
         <DeleteMemoButton />
         <LogoutButton color="white" />
+      </Box>
+      <Box>
+        <BackHomeButton />
       </Box>
       <Text textAlign={["center"]} color="green">
         <Link to="/">HOMEはこちら</Link>

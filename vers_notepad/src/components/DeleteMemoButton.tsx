@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { memo } from "react";
 import axios from "axios";
 import { useRecoilState } from "recoil";
@@ -11,7 +11,7 @@ import { Box, Button, FormControl, Input } from "@chakra-ui/react";
 export const DeleteMemoButton = memo(() => {
   const [id, setId] = useState<string>("");
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);  
-  const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeId = useCallback( (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
     const newId = value.toString();
@@ -21,7 +21,7 @@ export const DeleteMemoButton = memo(() => {
     deleteMemos.length = 0;
     setGetMemos(deleteMemos);
     console.log(getMemos);
-  };  
+  },[getMemos, setGetMemos]);  
   
   const onClickDelete = async () => {
     try {
@@ -45,6 +45,7 @@ export const DeleteMemoButton = memo(() => {
       console.log(response.data);
       const newGetMemos = [...getMemos, ...response.data];
       setGetMemos(newGetMemos);
+      setId("");
     }
     catch (error) {
       toast.error("idが違います");
