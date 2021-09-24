@@ -11,18 +11,14 @@ import { Box, Button, FormControl, Input } from "@chakra-ui/react";
 export const DeleteMemoButton = memo(() => {
   const [id, setId] = useState<string>("");
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);  
-  const onChangeId = useCallback( (e: React.ChangeEvent<HTMLInputElement>) => {
+  
+  const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
     const newId = value.toString();
     setId(newId);
+  };
     
-    const deleteMemos = [...getMemos];
-    deleteMemos.length = 0;
-    setGetMemos(deleteMemos);
-    console.log(getMemos);
-  },[getMemos, setGetMemos]);  
-  
   const onClickDelete = async () => {
     try {
       const token = getItem(Keys.access_token);
@@ -33,8 +29,7 @@ export const DeleteMemoButton = memo(() => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          });
-      
+          });      
       const response = await axios.get<Memo[]>(
         "https://raisetech-memo-api.herokuapp.com/api/memos",
         {
@@ -43,8 +38,7 @@ export const DeleteMemoButton = memo(() => {
           },
         });
       console.log(response.data);
-      const newGetMemos = [...getMemos, ...response.data];
-      setGetMemos(newGetMemos);
+      setGetMemos(response.data);
       setId("");
     }
     catch (error) {

@@ -17,13 +17,12 @@ export const Home = () => {
       <Box mx="auto" my={[50, 8]} p="auto" w={20}>
         <GetListButton />
       </Box>
-
       <Box mx="auto" my={8} p="auto" w={20}>
         <ModalButton />
       </Box>
       <Text textAlign={["center"]} color="green.500">
         <Link to="/Notepad">「メモ帳」はこちら</Link>
-      </Text>    
+      </Text>
       <Toaster />
     </Box>
   );
