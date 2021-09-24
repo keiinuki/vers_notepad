@@ -1,11 +1,11 @@
 import "./components.css";
 import { useState } from "react";
 import { memo } from "react";
-import { Modal } from "./Modal"
+import { LoginModal } from "./LoginModal"
 import { Button } from "@chakra-ui/react";
 
 
-export const ModalButton = memo(() => {
+export const LoginModalButton = memo(() => {
   const [show, setShow] = useState<boolean>(
     false
   );
@@ -17,7 +17,7 @@ export const ModalButton = memo(() => {
       <Button colorScheme="teal" size="sm" onClick={openModal}>
         ログインはこちらから
       </Button>
-      <Modal show={show} setShow={setShow} />
+      <LoginModal show={show} setShow={setShow} />
     </div>
   );
 });

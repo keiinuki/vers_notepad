@@ -8,7 +8,7 @@ type ModalButton = {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const Modal = memo(( props: ModalButton ) => {
+export const LoginModal = memo(( props: ModalButton ) => {
   const closeModal = () => {
     props.setShow(false);
   };

@@ -10,7 +10,7 @@ import { Box, Button, FormControl, Input } from "@chakra-ui/react";
 
 export const DeleteMemoButton = memo(() => {
   const [id, setId] = useState<string>("");
-  const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);  
+  const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
   
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -36,10 +36,10 @@ export const DeleteMemoButton = memo(() => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
-      console.log(response.data);
+        });      
       setGetMemos(response.data);
       setId("");
+      console.log(getMemos);
     }
     catch (error) {
       toast.error("idが違います");
