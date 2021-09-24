@@ -112,6 +112,7 @@ export const Notepad = () => {
           onChange={onChangeTitle}
           placeholder="タイトルを入力"
           value={title}
+          required
         />
         <br />
         <input
@@ -170,9 +171,9 @@ export const Notepad = () => {
       </div>
       <div>
         <LogoutButton color="white" />
-        
-          <BackHomeButton />
-        
+
+        <BackHomeButton />
+
         <Link to="/">HOMEはこちら</Link>
       </div>
     </Box>
