@@ -6,7 +6,7 @@ export const getMemosState = atom<Memo[]>({
   default: [],
 });
 
-export const updateMemosState = atom<Memo[]>({
-  key: "updateMemosState",
-  default: [],
-});
+export const addIdState = atom<string>({
+  key: "addIdState",
+  default: "",
+})

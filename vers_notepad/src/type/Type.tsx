@@ -6,3 +6,8 @@ export type Memo = {
   date: string,
   mark_div: number,
 };
+
+export type ModalButton = {
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;  
+};

@@ -17,6 +17,7 @@ export const DeleteMemoButton = memo(() => {
     const value = e.target.value;
     const newId = value.toString();
     setId(newId);
+    console.log(id);
   };
     
   const onClickDelete = async () => {

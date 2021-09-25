@@ -5,14 +5,14 @@ import {
   Text,
   Flex
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { getMemosState } from "../store/atom";
 import { Link, useLocation } from "react-router-dom";
 import { Memo } from "../type/Type";
 import { LogoutButton } from "../components/LogoutButton";
 import { DeleteMemoButton } from "../components/DeleteMemoButton";
-import { EditForm } from "../components/EditForm";
+import { EditModalButton } from "../components/EditModalButton"
 import { BackHomeButton } from "../components/BackHomeButton";
 
 
@@ -54,7 +54,8 @@ export const PastArticles = () => {
       </UnorderedList>
       <Box>
         <DeleteMemoButton />
-        <EditForm />
+
+        <EditModalButton/>
         <LogoutButton color="white" />
       </Box>
       <Box>

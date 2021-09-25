@@ -10,7 +10,7 @@ import { Box } from "@chakra-ui/react";
 import { BackHomeButton } from "../components/BackHomeButton";
 
 export const Notepad = () => {  
-  const [id, setId] = useState<string>("");
+  //const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -18,12 +18,13 @@ export const Notepad = () => {
   const [mark_div, setMark_div] = useState<number>(0);
   const [memos, setMemos] = useState<Memo>();
   
-  const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const value = (e.target.value)
-    const newId = value.toString()
-    setId(newId)
-  };
+  // const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+    // const value = (e.target.value)
+    // const newId = value.toString()
+    // setId(newId)
+  //   setId(e.target.value);
+  // };
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setTitle(e.target.value)
@@ -75,33 +76,33 @@ export const Notepad = () => {
     };
     };
 
-  const onClickPut = async () => {
-    try{
-        const token = getItem(Keys.access_token);
-        const response = await axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
-          {
-          title: title,
-          category: category,
-          description: description,
-          date: date,
-          mark_div: mark_div,
-          }, {
-            headers: {
-            Authorization: `Bearer ${token}`,
-          }})          
-      console.log(response.data);
-      setMemos(response.data);
-      setId("");
-      setTitle("");
-      setCategory("");
-      setDescription("");
-      setDate("");
-      setMark_div(0);
-        }
-        catch (error) {
-          toast.error("失敗しました");
-        };
-        };
+  // const onClickPut = async () => {
+  //   try{
+  //       const token = getItem(Keys.access_token);
+  //       const response = await axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
+  //         {
+  //         title: title,
+  //         category: category,
+  //         description: description,
+  //         date: date,
+  //         mark_div: mark_div,
+  //         }, {
+  //           headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         }})          
+  //     console.log(response.data);
+  //     setMemos(response.data);
+  //     setId("");
+  //     setTitle("");
+  //     setCategory("");
+  //     setDescription("");
+  //     setDate("");
+  //     setMark_div(0);
+  //       }
+  //       catch (error) {
+  //         toast.error("失敗しました");
+  //       };
+  //       };
   
   return (
     <Box>
@@ -137,7 +138,7 @@ export const Notepad = () => {
           保存する
         </button>
         <br />
-        <input
+        {/*<input
           type="number"
           onChange={onChangeId}
           placeholder="idを入力"
@@ -146,7 +147,7 @@ export const Notepad = () => {
         <br />
         <button type="button" onClick={onClickPut}>
           編集する
-        </button>
+  </button>*/}
       </form>
       <div>
         <h2>登録したメモはこれです</h2>
