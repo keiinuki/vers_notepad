@@ -7,7 +7,7 @@ import { memo } from "react";
 import { useRecoilState } from "recoil";
 import { getMemosState, addIdState } from "../store/atom";
 import toast, { Toaster } from "react-hot-toast";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, FormControl, Input, NumberInput } from "@chakra-ui/react";
 
 export const EditForm = memo((props: ModalButton ) => {
   const [id, setId] = useState<string>("");
@@ -88,14 +88,14 @@ export const EditForm = memo((props: ModalButton ) => {
   
   
     return (
-      <Box>
+      <div>
         <h1>この記事を編集します</h1>
         <form>
           <input
             type="number"
             onChange={onChangeId}
             value={id}
-            defaultValue={editMemo.id}
+            defaultValue={parseInt(addId)}
           />
           <br />
           <input
@@ -113,24 +113,21 @@ export const EditForm = memo((props: ModalButton ) => {
             defaultValue={editMemo.category}
           />
           <br />
-          <textarea
-            onChange={onChangeDescription}
-            value={description}
-            defaultValue={editMemo.description || ""}
-          ></textarea> 
+          <textarea onChange={onChangeDescription} value={description}>
+            {editMemo.description}
+          </textarea>
           <br />
           <input
             type="date"
             onChange={onChangeDate}
             value={date}
             defaultValue={editMemo.date}
-          ></input>
+          />
           <input
             type="radio"
             name="revel"
             value="0"
             onChange={onChangeMarkDiv}
-            defaultValue={editMemo.mark_div || 0}
           />
           重要
           <input
@@ -138,17 +135,16 @@ export const EditForm = memo((props: ModalButton ) => {
             name="revel"
             value="1"
             onChange={onChangeMarkDiv}
-            defaultValue={editMemo.mark_div || 1}
           />
           普通
           <br />
-          <button type="button" onClick={onClickPut}>
+          <Button type="button" onClick={onClickPut}>
             編集する
-          </button>
+          </Button>
         </form>
         <div>
           <Toaster />
         </div>
-      </Box>
+      </div>
     );
   });
