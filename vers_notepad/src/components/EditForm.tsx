@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Keys, getItem } from "../utils/LocalStorage";
 import { Memo, ModalButton } from "../type/Type";
@@ -17,18 +17,13 @@ export const EditForm = memo((props: ModalButton ) => {
   const [date, setDate] = useState<string>("");
   const [mark_div, setMark_div] = useState<number>(0);
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
-  const [addId, setAddId] = useRecoilState<string>(addIdState);
+  const [addId] = useRecoilState<string>(addIdState);    
   
-  
-  const editMemo:Memo = getMemos.find((value) => value.id === addId) as Memo;
-  setAddId("");
+  const editMemo: Memo = getMemos.find((value) => value.id == addId) as Memo;    
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-   const value = e.target.value;
-   const newId = value.toString();
-   setId(newId);
-    //setId(e.target.value);
+  setId(e.target.value);
   };
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -100,7 +95,7 @@ export const EditForm = memo((props: ModalButton ) => {
             type="number"
             onChange={onChangeId}
             value={id}
-            defaultValue={parseInt(editMemo.id)}
+            defaultValue={editMemo.id}
           />
           <br />
           <input
@@ -121,8 +116,8 @@ export const EditForm = memo((props: ModalButton ) => {
           <textarea
             onChange={onChangeDescription}
             value={description}
-            defaultValue={editMemo.description}
-          ></textarea>
+            defaultValue={editMemo.description || ""}
+          ></textarea> 
           <br />
           <input
             type="date"
@@ -135,7 +130,7 @@ export const EditForm = memo((props: ModalButton ) => {
             name="revel"
             value="0"
             onChange={onChangeMarkDiv}
-            defaultValue={editMemo.mark_div}
+            defaultValue={editMemo.mark_div || 0}
           />
           重要
           <input
@@ -143,7 +138,7 @@ export const EditForm = memo((props: ModalButton ) => {
             name="revel"
             value="1"
             onChange={onChangeMarkDiv}
-            defaultValue={editMemo.mark_div}
+            defaultValue={editMemo.mark_div || 1}
           />
           普通
           <br />
