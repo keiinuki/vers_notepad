@@ -12,7 +12,9 @@ export const EditModalButton = memo(() => {
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setAddId(e.target.value);
+    const value = e.target.value;
+    const newAddId = value.toString();
+    setAddId(newAddId);
     console.log(addId);
   };
   const openModal = () => {

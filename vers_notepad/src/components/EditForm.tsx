@@ -19,11 +19,13 @@ export const EditForm = memo((props: ModalButton ) => {
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
   const [addId] = useRecoilState<string>(addIdState);    
   
-  const editMemo: Memo = getMemos.find((value) => value.id == addId) as Memo;    
+  const editMemo: Memo = getMemos.find((value) => value.id === addId) as Memo;    
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-  setId(e.target.value);
+  const value = e.target.value;
+  const newId = value.toString();
+  setId(newId);
   };
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -94,14 +96,12 @@ export const EditForm = memo((props: ModalButton ) => {
           <input
             type="number"
             onChange={onChangeId}
-            value={id}
             defaultValue={parseInt(addId)}
           />
           <br />
           <input
             type="text"
             onChange={onChangeTitle}
-            value={title}
             required
             defaultValue={editMemo.title}
           />
@@ -109,18 +109,17 @@ export const EditForm = memo((props: ModalButton ) => {
           <input
             type="text"
             onChange={onChangeCategory}
-            value={category}
             defaultValue={editMemo.category}
           />
           <br />
-          <textarea onChange={onChangeDescription} value={description}>
-            {editMemo.description}
-          </textarea>
+          <textarea
+            onChange={onChangeDescription}
+            defaultValue={editMemo.description}
+          ></textarea>
           <br />
           <input
             type="date"
             onChange={onChangeDate}
-            value={date}
             defaultValue={editMemo.date}
           />
           <input
