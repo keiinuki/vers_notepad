@@ -14,9 +14,7 @@ export const DeleteMemoButton = memo(() => {
   
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const value = e.target.value;
-    const newId = value.toString();
-    setId(newId);
+    setId(e.target.value);
     console.log(id);
   };
     

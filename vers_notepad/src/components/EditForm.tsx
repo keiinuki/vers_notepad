@@ -10,22 +10,22 @@ import toast, { Toaster } from "react-hot-toast";
 import { Box, Button, FormControl, Input, NumberInput } from "@chakra-ui/react";
 
 export const EditForm = memo((props: ModalButton ) => {
-  const [id, setId] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [mark_div, setMark_div] = useState<number>(0);
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
   const [addId] = useRecoilState<string>(addIdState);    
+  const editMemo: Memo = getMemos.find((value) => value.id === addId) as Memo;
+  const [id, setId] = useState<string>(editMemo.id);
+  const [title, setTitle] = useState<string>(editMemo.title);
+  const [category, setCategory] = useState<string>(editMemo.category);
+  const [description, setDescription] = useState<string>(editMemo.description);
+  const [date, setDate] = useState<string>(editMemo.date);
+  const [mark_div, setMark_div] = useState<number>(editMemo.mark_div);
   
-  const editMemo: Memo = getMemos.find((value) => value.id === addId) as Memo;    
+  
+     
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-  const value = e.target.value;
-  const newId = value.toString();
-  setId(newId);
+    setId(e.target.value);
   };
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -75,7 +75,7 @@ export const EditForm = memo((props: ModalButton ) => {
         }
       );
       setGetMemos(response.data);
-      console.log(getMemos);
+      console.log(id);
       setId("");
       setTitle("");
       setCategory("");
@@ -93,40 +93,24 @@ export const EditForm = memo((props: ModalButton ) => {
       <div>
         <h1>この記事を編集します</h1>
         <form>
-          <input
-            type="number"
-            onChange={onChangeId}
-            defaultValue={parseInt(addId)}
-          />
+          <input type="number" onChange={onChangeId} value={id} />
           <br />
-          <input
-            type="text"
-            onChange={onChangeTitle}
-            required
-            defaultValue={editMemo.title}
-          />
+          <input type="text" onChange={onChangeTitle} required value={title} />
           <br />
-          <input
-            type="text"
-            onChange={onChangeCategory}
-            defaultValue={editMemo.category}
-          />
+          <input type="text" onChange={onChangeCategory} value={category} />
           <br />
           <textarea
             onChange={onChangeDescription}
-            defaultValue={editMemo.description}
+            value={description}
           ></textarea>
           <br />
-          <input
-            type="date"
-            onChange={onChangeDate}
-            defaultValue={editMemo.date}
-          />
+          <input type="date" onChange={onChangeDate} value={date} />
           <input
             type="radio"
             name="revel"
             value="0"
             onChange={onChangeMarkDiv}
+            defaultChecked
           />
           重要
           <input
