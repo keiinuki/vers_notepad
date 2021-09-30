@@ -20,8 +20,6 @@ export const EditForm = memo((props: ModalButton ) => {
   const [date, setDate] = useState<string>(editMemo.date);
   const [mark_div, setMark_div] = useState<number>(editMemo.mark_div);
   
-  
-     
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -121,7 +119,11 @@ export const EditForm = memo((props: ModalButton ) => {
           />
           普通
           <br />
-          <Button type="button" onClick={onClickPut}>
+          <Button
+            type="button"
+            onClick={onClickPut}
+            
+          >
             編集する
           </Button>
         </form>
