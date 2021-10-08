@@ -3,7 +3,8 @@ import {
   UnorderedList,
   Box,
   Text,
-  Flex
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -32,30 +33,32 @@ export const PastArticles = () => {
       <Text fontSize={32} textAlign={["center"]}>
         今までの記事はこちら
       </Text>
-
-      <UnorderedList>
-        {getMemos.map((getMemos: Memo, index: number) => (
-          <Flex m={5} p={15} w={300} bg="tomato" key={index}>
-            <ListItem>
-              {getMemos?.id}
-              <br />
-              {getMemos?.title}
-              <br />
-              {getMemos?.category}
-              <br />
-              {getMemos?.description}
-              <br />
-              {getMemos?.date}
-              <br />
-              {getMemos?.mark_div}
-            </ListItem>
-          </Flex>
-        ))}
-      </UnorderedList>
+      <Flex>        
+        <UnorderedList>
+          {getMemos.map((getMemos: Memo, index: number) => (
+            <Box m={5} p={15} w={300} bg="tomato" key={index}>
+              <ListItem>
+                {getMemos?.id}
+                <br />
+                {getMemos?.title}
+                <br />
+                {getMemos?.category}
+                <br />
+                {getMemos?.description}
+                <br />
+                {getMemos?.date}
+                <br />
+                {getMemos?.mark_div}
+              </ListItem>
+            </Box>
+          ))}
+          <Spacer />
+          </UnorderedList>
+      </Flex>
       <Box>
         <DeleteMemoButton />
 
-        <EditModalButton/>
+        <EditModalButton />
         <LogoutButton color="white" />
       </Box>
       <Box>

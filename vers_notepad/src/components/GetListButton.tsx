@@ -22,8 +22,7 @@ export const GetListButton = memo(() => {
         })      
       console.log(response.data);
       const newGetMemos = [...getMemos, ...response.data];
-      setGetMemos(newGetMemos);   
-      
+      setGetMemos(newGetMemos);      
       history.push({ pathname: "/notepad/pastarticles", state: getMemos });
     }
     catch (error) {

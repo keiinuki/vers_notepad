@@ -20,23 +20,21 @@ export const LoginForm = memo(() => {
     setPassword(e.target.value);
   };
 
-  const onClickLogin = () => {
-    axios
-      .post("https://raisetech-memo-api.herokuapp.com/api/login", {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        console.log(response.data.access_token);
-        setItem(Keys.access_token, response.data.access_token);
-        toast.success("ログインしました！");
-      })
-      .then(() => {
-        setRedirect(true);
-      })
-      .catch(() => {
-        toast.error("ログインに失敗しました．．．");
-      });
+  const onClickLogin = async () => {
+    try {
+      const response = await axios
+        .post("https://raisetech-memo-api.herokuapp.com/api/login", {
+          email: email,
+          password: password,
+        })
+      console.log(response.data.access_token);
+      setItem(Keys.access_token, response.data.access_token);
+      toast.success("ログインしました！");      
+      setRedirect(true);
+    }
+    catch(error) {
+      toast.error("ログインに失敗しました．．．");
+    };
   };
 
   if (redirect) {

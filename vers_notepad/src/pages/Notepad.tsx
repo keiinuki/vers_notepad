@@ -6,25 +6,25 @@ import { Memo } from "../type/Type"
 import toast, { Toaster } from "react-hot-toast";
 import { LogoutButton } from "../components/LogoutButton";
 import { GetListButton } from "../components/GetListButton"
-import { Box } from "@chakra-ui/react";
+import {
+  Box,
+  FormControl,
+  Input,
+  Button,
+  Textarea,
+  Radio, RadioGroup,
+  FormErrorMessage,
+  FormHelperText,
+} from "@chakra-ui/react";
 import { BackHomeButton } from "../components/BackHomeButton";
 
-export const Notepad = () => {  
-  //const [id, setId] = useState<string>("");
+export const Notepad = () => {
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [mark_div, setMark_div] = useState<number>(0);
   const [memos, setMemos] = useState<Memo>();
-  
-  // const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   e.preventDefault();
-    // const value = (e.target.value)
-    // const newId = value.toString()
-    // setId(newId)
-  //   setId(e.target.value);
-  // };
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setTitle(e.target.value)
@@ -75,81 +75,47 @@ export const Notepad = () => {
       toast.error("もう一度ログインしてください！");
     };
     };
-
-  // const onClickPut = async () => {
-  //   try{
-  //       const token = getItem(Keys.access_token);
-  //       const response = await axios.put<Memo>(`https://raisetech-memo-api.herokuapp.com/api/memo/${id}`, 
-  //         {
-  //         title: title,
-  //         category: category,
-  //         description: description,
-  //         date: date,
-  //         mark_div: mark_div,
-  //         }, {
-  //           headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         }})          
-  //     console.log(response.data);
-  //     setMemos(response.data);
-  //     setId("");
-  //     setTitle("");
-  //     setCategory("");
-  //     setDescription("");
-  //     setDate("");
-  //     setMark_div(0);
-  //       }
-  //       catch (error) {
-  //         toast.error("失敗しました");
-  //       };
-  //       };
   
   return (
     <Box>
       <h1>ここをメモ帳にします</h1>
-      <form>
-        <input
+      <FormControl>
+        <Input
           type="text"
           onChange={onChangeTitle}
           placeholder="タイトルを入力"
           value={title}
-          required
+          isrequired
         />
         <br />
-        <input
+        <Input
           type="text"
           onChange={onChangeCategory}
           placeholder="カテゴリーを入力"
           value={category}
         />
         <br />
-        <textarea
+        <Textarea
           onChange={onChangeDescription}
           placeholder="本文を入力"
           value={description}
-        ></textarea>
+        />
         <br />
         <input type="date" onChange={onChangeDate} value={date}></input>
+        {/*<RadioGroup onChange={setMark_div} value={mark_div}>
+          <Radio value="0" >重要</Radio>
+          <Radio value="1">普通</Radio>
+        </RadioGroup>*/}
         <input type="radio" name="revel" value="0" onChange={onChangeMarkDiv} />
         重要
         <input type="radio" name="revel" value="1" onChange={onChangeMarkDiv} />
         普通
-        <button type="button" onClick={onClickAdd}>
+        <Button type="button" onClick={onClickAdd}>
           保存する
-        </button>
+        </Button>
         <br />
-        {/*<input
-          type="number"
-          onChange={onChangeId}
-          placeholder="idを入力"
-          value={id}
-        />
-        <br />
-        <button type="button" onClick={onClickPut}>
-          編集する
-  </button>*/}
-      </form>
-      <div>
+      </FormControl>
+      <Box>
         <h2>登録したメモはこれです</h2>
         <p>
           {memos?.id}
@@ -165,18 +131,18 @@ export const Notepad = () => {
           {memos?.mark_div}
         </p>
         <br />
-        <div>
+        <Box>
           <GetListButton />
-        </div>
+        </Box>
         <Toaster />
-      </div>
-      <div>
+      </Box>
+      <Box>
         <LogoutButton color="white" />
 
         <BackHomeButton />
 
         <Link to="/">HOMEはこちら</Link>
-      </div>
+      </Box>
     </Box>
   );
 };

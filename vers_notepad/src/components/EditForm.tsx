@@ -7,7 +7,14 @@ import { memo } from "react";
 import { useRecoilState } from "recoil";
 import { getMemosState, addIdState } from "../store/atom";
 import toast, { Toaster } from "react-hot-toast";
-import { Box, Button, FormControl, Input, NumberInput } from "@chakra-ui/react";
+import {
+  Box,
+  FormControl,
+  Input,
+  Button,
+  Textarea,
+  Text,
+} from "@chakra-ui/react";
 
 export const EditForm = memo((props: ModalButton ) => {
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
@@ -88,19 +95,19 @@ export const EditForm = memo((props: ModalButton ) => {
   
   
     return (
-      <div>
-        <h1>この記事を編集します</h1>
-        <form>
+      <Box>
+        <Text fontSize={24} textAlign={["center"]}>この記事を編集します</Text>
+        <FormControl>
           <input type="number" onChange={onChangeId} value={id} />
           <br />
-          <input type="text" onChange={onChangeTitle} required value={title} />
+          <Input type="text" onChange={onChangeTitle} required value={title} />
           <br />
-          <input type="text" onChange={onChangeCategory} value={category} />
+          <Input type="text" onChange={onChangeCategory} value={category} />
           <br />
-          <textarea
+          <Textarea
             onChange={onChangeDescription}
             value={description}
-          ></textarea>
+          />
           <br />
           <input type="date" onChange={onChangeDate} value={date} />
           <input
@@ -119,17 +126,13 @@ export const EditForm = memo((props: ModalButton ) => {
           />
           普通
           <br />
-          <Button
-            type="button"
-            onClick={onClickPut}
-            
-          >
+          <Button type="button" onClick={onClickPut}>
             編集する
           </Button>
-        </form>
-        <div>
+        </FormControl>
+        <Box>
           <Toaster />
-        </div>
-      </div>
+        </Box>
+      </Box>
     );
   });
