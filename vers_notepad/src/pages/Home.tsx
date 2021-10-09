@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { LoginModalButton } from "../components/LoginModalButton"
 import { Box, Text } from "@chakra-ui/react";
 
-import { GetListButton } from "../components/GetListButton";
+import { ToArticlesButton } from "../components/ToArticlesButton";
 
 export const Home = () => {
 
@@ -15,7 +15,7 @@ export const Home = () => {
         HOME
       </Text>
       <Box mx="auto" my={[50, 8]} p="auto" w={20}>
-        <GetListButton />
+        <ToArticlesButton />
       </Box>
       <Box mx="auto" my={8} p="auto" w={20}>
         <LoginModalButton />

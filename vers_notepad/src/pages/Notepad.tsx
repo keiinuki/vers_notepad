@@ -5,7 +5,7 @@ import { Keys, getItem } from "../utils/LocalStorage";
 import { Memo } from "../type/Type"
 import toast, { Toaster } from "react-hot-toast";
 import { LogoutButton } from "../components/LogoutButton";
-import { GetListButton } from "../components/GetListButton"
+import { ToArticlesButton } from "../components/ToArticlesButton";
 import {
   Box,
   FormControl,
@@ -132,7 +132,7 @@ export const Notepad = () => {
         </p>
         <br />
         <Box>
-          <GetListButton />
+          <ToArticlesButton />
         </Box>
         <Toaster />
       </Box>

@@ -11,6 +11,8 @@ import { useRecoilState } from "recoil";
 import { getMemosState } from "../store/atom";
 import { Link, useLocation } from "react-router-dom";
 import { Memo } from "../type/Type";
+import { Keys, getItem } from "../utils/LocalStorage";
+import axios from "axios";
 import { LogoutButton } from "../components/LogoutButton";
 import { DeleteMemoButton } from "../components/DeleteMemoButton";
 import { EditModalButton } from "../components/EditModalButton"
@@ -18,15 +20,19 @@ import { BackHomeButton } from "../components/BackHomeButton";
 
 
 export const PastArticles = () => {
-  const { state } =
-    useLocation<{ getMemos: Memo[] }>();
-  const [getMemos, setGetMemos] = useRecoilState(getMemosState);
+  const token = getItem(Keys.access_token);
+  const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
   useEffect(() => {
-    if (state.getMemos) {
-      setGetMemos(state.getMemos);
-    } 
-    }, [state.getMemos, setGetMemos]);
-  
+    axios.get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    })     
+    .then((response) => {
+      const newGetMemos = [...getMemos, ...response.data];
+      setGetMemos(newGetMemos);      
+    });
+  }, []);
 
   return (
     <Box m="auto" p={35} bg="gray.50">
