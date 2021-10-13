@@ -1,5 +1,5 @@
 import "./components.css";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { EditForm } from "./EditForm";
 import { Button } from "@chakra-ui/react";
 import { ModalButton } from "../type/Type";

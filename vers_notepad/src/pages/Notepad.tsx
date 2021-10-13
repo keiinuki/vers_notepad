@@ -16,6 +16,7 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
+import Calendar from "react-calendar";
 import { BackHomeButton } from "../components/BackHomeButton";
 
 export const Notepad = () => {
@@ -39,7 +40,7 @@ export const Notepad = () => {
   };
   const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setDate(e.target.value)
+    setDate(e.target.value);
   };
   const onChangeMarkDiv = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -101,7 +102,7 @@ export const Notepad = () => {
           value={description}
         />
         <br />
-        <input type="date" onChange={onChangeDate} value={date}></input>
+        <input type="date" onChange={onChangeDate} value={date} />
         {/*<RadioGroup onChange={setMark_div} value={mark_div}>
           <Radio value="0" >重要</Radio>
           <Radio value="1">普通</Radio>

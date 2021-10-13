@@ -6,10 +6,10 @@ import {
   Flex,
   Spacer,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { getMemosState } from "../store/atom";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Memo } from "../type/Type";
 import { Keys, getItem } from "../utils/LocalStorage";
 import axios from "axios";
@@ -23,16 +23,17 @@ export const PastArticles = () => {
   const token = getItem(Keys.access_token);
   const [getMemos, setGetMemos] = useRecoilState<Memo[]>(getMemosState);
   useEffect(() => {
-    axios.get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    })     
-    .then((response) => {
-      const newGetMemos = [...getMemos, ...response.data];
-      setGetMemos(newGetMemos);      
-    });
-  }, []);
+    axios
+      .get<Memo[]>("https://raisetech-memo-api.herokuapp.com/api/memos", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const newGetMemos = [...getMemos, ...response.data];
+        setGetMemos(newGetMemos);
+      });
+  },[]);
 
   return (
     <Box m="auto" p={35} bg="gray.50">
