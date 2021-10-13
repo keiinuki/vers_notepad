@@ -1,7 +1,7 @@
 import "./components.css";
 import { memo } from "react";
 import { EditForm } from "./EditForm";
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 import { ModalButton } from "../type/Type";
 
 export const EditModal = memo((props: ModalButton) => {
@@ -10,14 +10,14 @@ export const EditModal = memo((props: ModalButton) => {
   };
   if (props.show) {
     return (
-      <div id="overlay" onClick={closeModal}>
-        <div id="content" onClick={(e) => e.stopPropagation()}>
+      <Box id="overlay" onClick={closeModal}>
+        <Box id="content" onClick={(e) => e.stopPropagation()}>
           <EditForm show={props.show} setShow={props.setShow} />
-          <Button colorScheme="red" size="sm" onClick={closeModal}>
+          <Button colorScheme="red" size="sm" m="10px" onClick={closeModal}>
             戻る
           </Button>
-        </div>
-      </div>
+        </Box>
+      </Box>
     );
   } else {
     return null;

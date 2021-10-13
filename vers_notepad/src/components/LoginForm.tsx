@@ -4,7 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router";
 import { Keys, setItem } from "../utils/LocalStorage";
 import toast, { Toaster } from "react-hot-toast";
-import { Button } from "@chakra-ui/react";
+import { Box, Button, FormControl, Input, Text } from "@chakra-ui/react";
 
 export const LoginForm = memo(() => {
   const [email, setEmail] = useState<string>("");
@@ -42,26 +42,38 @@ export const LoginForm = memo(() => {
   }
 
   return (
-    <div>
-      <h2>メールアドレスとパスワードを入力してください</h2>
-      <form>
-        <input
+    <Box>
+      <Text fontSize={24} textAlign={["center"]}>
+        メールアドレスとパスワードを入力してください
+      </Text>
+      <FormControl>
+        <Input
           type="email"
           onChange={(e) => onChangeEmail(e)}
           placeholder="e-mailを入力"
+          w="500px"
+          m="10px"
         />
         <br />
-        <input
+        <Input
           type="password"
           onChange={(e) => onChangePassword(e)}
           placeholder="パスワードを入力"
+          w="500px"
+          m="10px"
         />
         <br />
-        <Button colorScheme="blue" size="sm" type="button" onClick={onClickLogin} >
+        <Button
+          colorScheme="blue"
+          size="sm"
+          m="10px"
+          type="button"
+          onClick={onClickLogin}
+        >
           ログイン
         </Button>
-      </form>
+      </FormControl>
       <Toaster />
-    </div>
+    </Box>
   );
-});
+  });

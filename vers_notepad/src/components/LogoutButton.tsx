@@ -28,6 +28,8 @@ export const LogoutButton = memo((props: ButtonColor) => {
     <Button
       colorScheme="red"
       size="sm"
+      mx="10px"
+      my="50px"
       onClick={onClick}
       style={{ color: props.color }}
     >

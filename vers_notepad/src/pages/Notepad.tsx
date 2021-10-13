@@ -8,6 +8,7 @@ import { LogoutButton } from "../components/LogoutButton";
 import { ToArticlesButton } from "../components/ToArticlesButton";
 import {
   Box,
+  Text,
   FormControl,
   Input,
   Button,
@@ -79,10 +80,14 @@ export const Notepad = () => {
   
   return (
     <Box>
-      <h1>ここをメモ帳にします</h1>
+      <Text fontSize={32} textAlign={["center"]}>
+        ここをメモ帳にします
+      </Text>
       <FormControl>
         <Input
           type="text"
+          m="10px"
+          w="800px"
           onChange={onChangeTitle}
           placeholder="タイトルを入力"
           value={title}
@@ -91,12 +96,16 @@ export const Notepad = () => {
         <br />
         <Input
           type="text"
+          m="10px"
+          w="600px"
           onChange={onChangeCategory}
           placeholder="カテゴリーを入力"
           value={category}
         />
         <br />
         <Textarea
+          m="10px"
+          w="800px"
           onChange={onChangeDescription}
           placeholder="本文を入力"
           value={description}
@@ -111,13 +120,21 @@ export const Notepad = () => {
         重要
         <input type="radio" name="revel" value="1" onChange={onChangeMarkDiv} />
         普通
-        <Button type="button" onClick={onClickAdd}>
+        <Button
+          type="button"
+          size="sm"
+          m="10px"
+          colorScheme="teal"
+          onClick={onClickAdd}
+        >
           保存する
         </Button>
         <br />
       </FormControl>
       <Box>
-        <h2>登録したメモはこれです</h2>
+        <Text fontSize={24} textAlign={["center"]}>
+          登録したメモはこれです
+        </Text>
         <p>
           {memos?.id}
           <br />

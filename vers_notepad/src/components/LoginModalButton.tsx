@@ -2,7 +2,7 @@ import "./components.css";
 import { useState } from "react";
 import { memo } from "react";
 import { LoginModal } from "./LoginModal"
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 
 
 export const LoginModalButton = memo(() => {
@@ -13,11 +13,11 @@ export const LoginModalButton = memo(() => {
     setShow(true)
   }
   return (
-    <div>
-      <Button colorScheme="teal" size="sm" onClick={openModal}>
+    <Box>
+      <Button colorScheme="teal" size="sm" m="10px" onClick={openModal}>
         ログインはこちらから
       </Button>
       <LoginModal show={show} setShow={setShow} />
-    </div>
+    </Box>
   );
 });

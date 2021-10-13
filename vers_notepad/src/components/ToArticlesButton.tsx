@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useHistory } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 
 export const ToArticlesButton = memo(() => {
   const history = useHistory();
@@ -9,11 +9,17 @@ export const ToArticlesButton = memo(() => {
   };
 
   return (
-    <div>
-      <Button colorScheme="teal" size="sm" type="button" onClick={onClickGet}>
+    <Box>
+      <Button
+        colorScheme="teal"
+        size="sm"
+        m="10px"
+        type="button"
+        onClick={onClickGet}
+      >
         今までの記事はこちら
       </Button>
-    </div>
+    </Box>
   );
 });
 

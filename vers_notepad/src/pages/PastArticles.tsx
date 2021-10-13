@@ -17,6 +17,7 @@ import { LogoutButton } from "../components/LogoutButton";
 import { DeleteMemoButton } from "../components/DeleteMemoButton";
 import { EditModalButton } from "../components/EditModalButton"
 import { BackHomeButton } from "../components/BackHomeButton";
+import toast from "react-hot-toast";
 
 
 export const PastArticles = () => {
@@ -32,7 +33,11 @@ export const PastArticles = () => {
       .then((response) => {
         const newGetMemos = [...getMemos, ...response.data];
         setGetMemos(newGetMemos);
+      })
+      .catch((error) => {
+        toast.error("ログインしてください！");
       });
+      
   },[]);
 
   return (
@@ -40,7 +45,7 @@ export const PastArticles = () => {
       <Text fontSize={32} textAlign={["center"]}>
         今までの記事はこちら
       </Text>
-      <Flex>        
+      <Flex>
         <UnorderedList>
           {getMemos.map((getMemos: Memo, index: number) => (
             <Box m={5} p={15} w={300} bg="tomato" key={index}>
@@ -60,15 +65,13 @@ export const PastArticles = () => {
             </Box>
           ))}
           <Spacer />
-          </UnorderedList>
+        </UnorderedList>
       </Flex>
       <Box>
         <DeleteMemoButton />
-
         <EditModalButton />
+      
         <LogoutButton color="white" />
-      </Box>
-      <Box>
         <BackHomeButton />
       </Box>
       <Text textAlign={["center"]} color="green">

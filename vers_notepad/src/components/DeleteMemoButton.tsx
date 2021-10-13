@@ -50,11 +50,18 @@ export const DeleteMemoButton = memo(() => {
       <FormControl>
         <Input
           type="number"
+          w="100px"
           onChange={onChangeId}
           placeholder="idを入力"
           value={id}
         />
-        <Button type="button" onClick={onClickDelete}>
+        <Button
+          type="button"
+          size="sm"
+          m="10px"
+          colorScheme="red"
+          onClick={onClickDelete}
+        >
           削除する
         </Button>
       </FormControl>

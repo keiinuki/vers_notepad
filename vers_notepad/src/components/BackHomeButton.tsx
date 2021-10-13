@@ -24,6 +24,7 @@ export const BackHomeButton = memo((props: ButtonColor) => {
     <Button
       colorScheme="green"
       size="sm"
+      m="10px"
       onClick={onClick}
       style={{ color: props.color }}
     >

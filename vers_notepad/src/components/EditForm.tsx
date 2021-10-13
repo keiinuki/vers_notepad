@@ -90,12 +90,12 @@ export const EditForm = memo((props: ModalButton ) => {
     } catch (error) {
       toast.error("失敗しました");
     }
-  };
-  
-  
+  };  
     return (
       <Box>
-        <Text fontSize={24} textAlign={["center"]}>この記事を編集します</Text>
+        <Text fontSize={24} textAlign={["center"]}>
+          この記事を編集します
+        </Text>
         <FormControl>
           <input type="number" onChange={onChangeId} value={id} />
           <br />
@@ -103,10 +103,7 @@ export const EditForm = memo((props: ModalButton ) => {
           <br />
           <Input type="text" onChange={onChangeCategory} value={category} />
           <br />
-          <Textarea
-            onChange={onChangeDescription}
-            value={description}
-          />
+          <Textarea onChange={onChangeDescription} value={description} />
           <br />
           <input type="date" onChange={onChangeDate} value={date} />
           <input
@@ -125,7 +122,7 @@ export const EditForm = memo((props: ModalButton ) => {
           />
           普通
           <br />
-          <Button type="button" onClick={onClickPut}>
+          <Button type="button" size="sm" m="10px" onClick={onClickPut}>
             編集する
           </Button>
         </FormControl>
